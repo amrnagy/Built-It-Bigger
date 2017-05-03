@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Build it Bigger</string>
-    <string name="instructions">Press the button for a delicious joke!</string>
-    <string name="button_text">Tell Joke</string>
+    <string name="instructions">Press the button for catching a joke!</string>
+    <string name="button_text"> Joke Telling</string>
     <string name="action_settings">Settings</string>
-    <string name="banner_ad_unit_id">ca-app-pub-2702328790063878/692187648735</string>
-    <string name="welcome">Hello In our Jokes Free App</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="welcome"> Free App for Catch Jokes</string>
+    <string name="progress_text">Loading..........</string>
+
 </resources>

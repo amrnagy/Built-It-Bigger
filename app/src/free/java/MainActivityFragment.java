@@ -1,6 +1,4 @@
-package com.udacity.gradle.builditbigger;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,16 +14,18 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.udacity.gradle.builditbigger.AsyncTaskEndpoints;
+import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.ResponseAsync;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment implements ResponseAsync {
+    private ProgressDialog dialog1;
     InterstitialAd mInterstitialAd;
     String jokeStr;
-    AdRequest adReq1;
-    private ProgressDialog dialog1;
 
     public MainActivityFragment() {
     }
@@ -34,6 +34,8 @@ public class MainActivityFragment extends Fragment implements ResponseAsync {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    AdRequest adReq1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

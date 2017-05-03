@@ -1,21 +1,18 @@
-package com.udacity.gradle.builditbigger;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.amr.jokeobserver.JokeObserver;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.udacity.gradle.builditbigger.AsyncTaskEndpoints;
+import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.ResponseAsync;
 
 
 /**
@@ -24,7 +21,7 @@ import com.google.android.gms.ads.InterstitialAd;
 public class MainActivityFragment extends Fragment implements ResponseAsync {
     InterstitialAd mInterstitialAd;
     String jokeStr;
-    AdRequest adReq1;
+    AdRequest adRequest1;
     private ProgressDialog dialog1;
 
     public MainActivityFragment() {
@@ -39,7 +36,16 @@ public class MainActivityFragment extends Fragment implements ResponseAsync {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
+        Button display = (Button) view.findViewById(R.id.display);
+        display.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                catchJoke();
+            }
+        });
+        return view;
+    }
+/*
         AdView mAdView = (AdView) view.findViewById(R.id.adView);
         AdRequest adReq = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -51,12 +57,12 @@ public class MainActivityFragment extends Fragment implements ResponseAsync {
         adReq1 = new AdRequest.Builder()
                 .addTestDevice("SEE_YOUR_LOGCAT_TO_GET_YOUR_DEVICE_ID")
                 .build();
-        mInterstitialAd.loadAd(adReq1);
+       /* mInterstitialAd.loadAd(adRequest1);
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
-                Intent intent = JokeObserver.makeIntent(getActivity(), jokeStr);
-                Toast.makeText(getActivity(), "joke" + jokeStr, Toast.LENGTH_SHORT).show();
+                Intent intent = JokeObserver.makeIntent(getActivity(), joke);
+                Toast.makeText(getActivity(), "joke"+joke, Toast.LENGTH_SHORT).show();
                 // startActivity(intent);
             }
         });
@@ -83,11 +89,12 @@ public class MainActivityFragment extends Fragment implements ResponseAsync {
 
         return view;
 
-    }
-
+    }*/
 
     private void catchJoke() {
-        Log.e("CatchString", "Catch new Joke");
+        dialog1 = new ProgressDialog(getContext());
+        dialog1.setMessage(getResources().getString(R.string.progress_text));
+        dialog1.show();
         AsyncTaskEndpoints asyncTask = new AsyncTaskEndpoints();
         asyncTask.delegate = this;
         asyncTask.execute();
@@ -96,16 +103,9 @@ public class MainActivityFragment extends Fragment implements ResponseAsync {
     @Override
     public void processFinish(String output) {
         jokeStr = output;
+        dialog1.dismiss();
+        Intent intent = JokeObserver.makeIntent(getActivity(), jokeStr);
+        startActivity(intent);
 
     }
-      /*  AdView mAdView = (AdView) root.findViewById(R.id.adView);
-        // Create an ad request. Check logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mAdView.loadAd(adRequest);*/
-
-
 }

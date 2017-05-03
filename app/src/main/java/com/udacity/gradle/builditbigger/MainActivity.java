@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        AsyncTaskEndpoints asyncTask=new AsyncTaskEndpoints();
+        //    AsyncTaskEndpoints asyncTask=new AsyncTaskEndpoints();
        // asyncTask.delegate = this;
-        asyncTask.execute();
+        //  asyncTask.execute();
 
    /*     Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
         TextView textView = (TextView) findViewById(R.id.instructions_text_view);

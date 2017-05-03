@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.amr.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -17,9 +18,9 @@ import java.io.IOException;
 
 public class AsyncTaskEndpoints extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
+    public ResponseAsync delegate = null;
     private Context context;
     private String joke;
-    public ResponseAsync delegate = null;
 
     @Override
     protected void onPreExecute() {
@@ -41,7 +42,7 @@ public class AsyncTaskEndpoints extends AsyncTask<Void, Void, String> {
                     // - turn off compression when running against local devappserver
                     //- setRootUrl("http://192.168.1.9:8080/_ah/api/")
 
-                    .setRootUrl("https://builditbigger-166009.appspot.com/_ah/api/")
+                    .setRootUrl("https://builtitbigger-51ec5.appspot.com/_ah/api/")
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -65,6 +66,7 @@ public class AsyncTaskEndpoints extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         joke = result;
+        Log.e("Result", "REsult " + joke);
         delegate.processFinish(result);
     }
 }
