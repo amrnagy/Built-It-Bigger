@@ -42,14 +42,15 @@ dependencies {
     compile project(':jokelibjava')
     compile project(':jokeobserver')
     compile project(path: ':backend', configuration: 'android-endpoints')
+    compile('com.google.api-client:google-api-client-android:1.17.0-rc') {
+        exclude module: 'httpclient'
+    }
+    compile('com.google.http-client:google-http-client-gson:1.17.0-rc') {
+        exclude module: 'httpclient'
+    }
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.google.android.gms:play-services-ads:9.8.0'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile ('com.google.api-client:google-api-client-android:1.17.0-rc') {
-        exclude module: 'httpclient'
-    }
-    compile ('com.google.http-client:google-http-client-gson:1.17.0-rc') {
-        exclude module: 'httpclient'
-    }
+    compile 'com.android.support:support-v4:25.3.1'
 }
